@@ -99,7 +99,7 @@ void ConfigPeriph(void) {
 
     //Configure peripherals here
 
-    //Configure the USART for 9600 baud asysnchronous transmission
+    //Configure the USART for 9600 baud asynchronous transmission
     SPBRG1 = 831; //9600 baud
     SPBRGH1 = 831 >> 8;
     TXSTA1bits.BRGH = 1;
@@ -109,7 +109,7 @@ void ConfigPeriph(void) {
     TXSTA1bits.TXEN = 1; //Enable transmission
 }
 
-void interrupt HighIsr(void) {
+void __interrupt(high_priority) HighIsr(void) {
     //Check the source of the interrupt
     if (INT0IF == 1) {
         //source is INT0
