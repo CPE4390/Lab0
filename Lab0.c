@@ -100,7 +100,7 @@ void ConfigPeriph(void) {
     //Configure peripherals here
 
     //Configure the USART for 9600 baud asynchronous transmission
-    SPBRG1 = 831; //9600 baud
+    SPBRG1 = 831;       //9600 baud
     SPBRGH1 = 831 >> 8;
     TXSTA1bits.BRGH = 1;
     BAUDCON1bits.BRG16 = 1;
