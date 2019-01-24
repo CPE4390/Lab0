@@ -3,20 +3,9 @@
 #include <string.h>
 #include "LCD.h"
 
-
-#if defined __18F8722
-#pragma config OSC=HSPLL
-#pragma config WDT=OFF
-#pragma config LVP=OFF
-#pragma config XINST=OFF
-#elif defined __18F87J11
 #pragma config FOSC=HSPLL
 #pragma config WDTEN=OFF
 #pragma config XINST=OFF
-#else
-#error Invalid processor selection
-#endif
-
 
 void InitPins(void);
 void ConfigInterrupts(void);
