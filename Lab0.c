@@ -1,6 +1,6 @@
 #include <xc.h>
 #include <stdio.h>
-#include <string.h>
+//#include <string.h>
 #include "LCD.h"
 
 #pragma config FOSC=HSPLL
@@ -11,16 +11,12 @@ void InitPins(void);
 void ConfigInterrupts(void);
 void ConfigPeriph(void);
 
-char line1str[17];
-char line2str[17];
 int count;
 volatile char buttonState;
-char buffer[17];
 
 void putch(char c);
 
 void main(void) {
-    long time;
     char currentState = buttonState;
     char temp;
 
@@ -38,20 +34,18 @@ void main(void) {
     while (1) {
         if (currentState != buttonState) {
             currentState = buttonState;
-            if (currentState == 0)
-                sprintf(line2str, "Pressed");
-            else
-                sprintf(line2str, "Released");
-            LCDClearLine(1);
-            LCDWriteLine(line2str, 1);
-            printf("%s\n", line2str);
+            if (currentState == 0) {
+                lprintf(1, "Pressed");
+                printf("Pressed");
+            } else {
+                lprintf(1, "Released");
+                printf("Released");
+            }
         }
-        sprintf(line1str, "Count = %d", count);
-        LCDClearLine(0);
-        LCDWriteLine(line1str, 0);
-        LATD = ~LATD;
+        lprintf(0, "Count = %d", count);
         printf("Count = %d\n", count);
-        for (time = 0; time < 310000L; ++time);
+        LATD = ~LATD;
+        __delay_ms(1000);
         ++count;
     }
 }
